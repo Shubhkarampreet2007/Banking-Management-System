@@ -1,50 +1,47 @@
 #include <iostream>
-#include <string>
-#include <iomanip>
+#include "Bank.h"
+
 using namespace std;
-class Account{
-    private:
-    string accountHolder;
-    long long accountNumber;
-    double balance;
-    public:
-    Account(string name , long long number , double initialBalance){
-        accountHolder = name;
-        accountNumber = number;
-        balance = initialBalance;
-    }
-    void deposit(double amount){
-        if(amount > 0){
-            balance += amount;
-            cout << "Deposit successfull " << endl;
-        }else{
-            cout << "Invalid deposit amount " << endl;
+
+int main() {
+    Bank bank;
+    int choice;
+
+    do {
+        cout << "\n================================\n";
+        cout << "   BANKING MANAGEMENT SYSTEM\n";
+        cout << "================================\n";
+
+        cout << "1. Create New Account\n";
+        cout << "2. Search Account\n";
+        cout << "3. Display All Accounts\n";
+        cout << "4. Exit\n";
+
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                bank.createAccount();
+                break;
+
+            case 2:
+                bank.searchAccount();
+                break;
+
+            case 3:
+                bank.displayAllAccounts();
+                break;
+
+            case 4:
+                cout << "Thank you for using our banking system!\n";
+                break;
+
+            default:
+                cout << "Invalid choice. Please try again.\n";
         }
-    }
-    void withdraw(double amount){
-        if(amount <= 0  ){
-            cout << "Invalid withdrawal amount" << endl;
 
+    } while (choice != 4);
 
-        }else if(amount > balance){
-            cout << "Insufficient balance " << endl;
-        }else{
-            balance -= amount;
-            cout << "Withdrawal successful." << endl;
-        }
-    }
-    void checkBalance() const {
-        cout << "Current Balance: Rs. " << fixed << setprecision(2) << balance << endl ;
-
-    }
-    void displayDetails() const{
-        cout << "-----Account details-----"<< endl;
-        cout << "Account Holder: " << accountHolder << endl;
-        cout << "Account number: " << accountNumber << endl;
-        checkBalance();
-    }
-};
-int main(){
-    Account acc1("Shubh" , 123456789 , 5000.00 );
-    acc1.displayDetails();
+    return 0;
 }
