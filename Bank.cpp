@@ -63,3 +63,12 @@ void Bank::displayAllAccounts() {
         acc.displayDetails();
     }
 }
+Account* Bank::findAccount(long long accountNumber) {
+    for (Account& acc : accounts) {
+        if (acc.getAccountNumber() == accountNumber) {
+            return &acc;
+        }
+    }
+
+    return nullptr;
+}

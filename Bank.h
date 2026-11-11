@@ -13,5 +13,6 @@ class Bank{
     void searchAccount();
     void displayAllAccounts();
     long long generateAccountNumber();
+    Account* findAccount(long long accountNumber);
 };
 #endif
