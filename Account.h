@@ -15,6 +15,7 @@ class Account{
     void displayDetails() const;
     long long getAccountNumber() const;
     double getBalance() const;
+    string getAccountHolder() const;
 
 
 };

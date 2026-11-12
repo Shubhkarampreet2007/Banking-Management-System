@@ -48,6 +48,9 @@ long long Account::getAccountNumber() const {
 double Account::getBalance() const {
     return balance;
 }
+string Account::getAccountHolder() const{
+    return accountHolder;
+}
 
 
         
