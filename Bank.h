@@ -14,5 +14,7 @@ class Bank{
     void displayAllAccounts();
     long long generateAccountNumber();
     Account* findAccount(long long accountNumber);
+    void saveAccounts() const;
+    void loadAccounts();
 };
 #endif

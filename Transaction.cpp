@@ -4,10 +4,13 @@
 #include <iomanip>
 #include <ctime>
 #include <limits>
+#include <fstream>
 
 using namespace std;
 
+// Constructor
 Transaction::Transaction(Bank& b) : bank(b) {
+    loadHistory();
 }
 
 // Record transaction
@@ -30,6 +33,7 @@ void Transaction::recordTransaction(string type, double amount,
     record.dateTime = dateTime;
 
     history.push_back(record);
+    saveTransaction(record);
 }
 
 // Task 1: Deposit Money
@@ -93,6 +97,11 @@ void Transaction::withdraw() {
         cout << "Invalid amount.\n";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return;
+    }
+
+    if (amount <= 0) {
+        cout << "Amount must be positive.\n";
         return;
     }
 
@@ -209,4 +218,42 @@ void Transaction::displayHistory() {
         cout << "\nDate & Time: " << record.dateTime;
         cout << "\n-----------------------------------------\n";
     }
+}
+
+// Save transaction in file
+void Transaction::saveTransaction(const TransactionRecord& record) {
+    ofstream file("transactions.txt", ios::app);
+
+    if (!file) {
+        cout << "Unable to open transaction file.\n";
+        return;
+    }
+
+    file << quoted(record.type) << " "
+         << record.amount << " "
+         << record.accountNumber << " "
+         << record.relatedAccountNumber << " "
+         << quoted(record.dateTime) << endl;
+}
+
+// Load previous transaction history
+void Transaction::loadHistory() {
+    ifstream file("transactions.txt");
+
+    if (!file) {
+        return;
+    }
+
+    TransactionRecord record;
+
+    while (file >> quoted(record.type)
+                >> record.amount
+                >> record.accountNumber
+                >> record.relatedAccountNumber
+                >> quoted(record.dateTime)) {
+
+        history.push_back(record);
+    }
+
+    file.close();
 }

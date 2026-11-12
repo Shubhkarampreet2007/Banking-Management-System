@@ -24,7 +24,8 @@ private:
     void recordTransaction(string type, double amount,
                            long long accountNumber,
                            long long relatedAccountNumber = 0);
-
+void saveTransaction(const TransactionRecord& record);
+void loadHistory();
 public:
     Transaction(Bank& b);
 
