@@ -122,7 +122,7 @@ The application can be tested using the following operations:
 **Developed by:**
 
 - Shubhkarampreet Kaur
-- Sheelu Devi
+- Shilu Devi
 
 **Course:** Bachelor of Technology – Computer Science and Engineering
 
